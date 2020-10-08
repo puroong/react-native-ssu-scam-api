@@ -1,5 +1,5 @@
 {
-  "name": "node-scam-api",
+  "name": "node-ssu-scam-api",
   "version": "1.0.0",
   "description": "unofficial smart campus api",
   "main": "lib/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/puroong/node-scam-api.git"
+    "url": "git+https://github.com/puroong/node-ssu-scam-api.git"
   },
   "author": "",
   "files": [
@@ -25,9 +25,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/puroong/node-scam-api/issues"
+    "url": "https://github.com/puroong/node-ssu-scam-api/issues"
   },
-  "homepage": "https://github.com/puroong/node-scam-api#readme",
+  "homepage": "https://github.com/puroong/node-ssu-scam-api#readme",
   "devDependencies": {
     "@types/cheerio": "^0.22.22",
     "@types/jest": "^26.0.14",
