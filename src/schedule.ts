@@ -3,6 +3,7 @@ import { load } from 'cheerio';
 import {CalendarResponse, parseICS} from 'node-ical';
 import { stringify } from 'qs';
 import {Cookie, SchduleExportAction, ScheduleExportForm, ScheduleExportOption} from "./type";
+import {GET_SCHEDULES_URL} from "./config";
 
 function generateSchduleExportForm($: cheerio.Root, option: ScheduleExportOption): ScheduleExportForm {
     const sesskey = $('input[name=sesskey]').attr('value');
@@ -19,14 +20,14 @@ function generateSchduleExportForm($: cheerio.Root, option: ScheduleExportOption
     }
 }
 
-export default function getSchedules (scheduleUrl: string, cookie: Cookie, option: ScheduleExportOption): Promise<CalendarResponse> {
-    return axios.get(scheduleUrl, { headers: { 'Cookie': cookie.toString() } })
+export default function getSchedules (cookie: Cookie, option: ScheduleExportOption): Promise<CalendarResponse> {
+    return axios.get(GET_SCHEDULES_URL, { headers: { 'Cookie': cookie.toString() } })
         .then(res => {
             const $ = load(res.data);
 
             return generateSchduleExportForm($, option);
         })
-        .then((schduleExportForm: ScheduleExportForm) => axios.post(scheduleUrl, stringify(schduleExportForm), { headers: { 'Cookie': cookie.toString() } }))
+        .then((schduleExportForm: ScheduleExportForm) => axios.post(GET_SCHEDULES_URL, stringify(schduleExportForm), { headers: { 'Cookie': cookie.toString() } }))
         .then(res => parseICS(res.data))
         .catch(err => { throw err })
 }

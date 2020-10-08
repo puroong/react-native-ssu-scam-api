@@ -1,12 +1,13 @@
 import axios from 'axios';
 import logout from "./logout";
 import login from "./login";
+import {MAIN_URL, testAuth} from "../config";
 
 test('test logout', () => {
-    return login('http://myclass.ssu.ac.kr/login/index.php', { username: '20160380', password: 'karkar55@' })
+    return login(testAuth)
         .then(cookie => {
-            return logout('http://myclass.ssu.ac.kr', cookie)
-                .then(() => axios.get('http://myclass.ssu.ac.kr', { headers: { 'Cookie': cookie.toString() } }));
+            return logout(cookie)
+                .then(() => axios.get(MAIN_URL, { headers: { 'Cookie': cookie.toString() } }));
         })
         .then((res) => {
             expect(res.data).toContain('LOGIN');
