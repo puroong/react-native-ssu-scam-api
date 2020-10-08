@@ -1,5 +1,6 @@
 import { LoginForm, Cookie } from '../type';
 import axios from 'axios';
+import {LOGIN_URL} from "../config";
 
 function getErrorCode(location: string): number {
   if (location.indexOf('errorcode=') != -1) {
@@ -18,10 +19,10 @@ function checkError(errorCode: number) {
   else throw new Error('unknown error');
 }
 
-export default function login(loginUrl: string, loginForm: LoginForm): Promise<Cookie> {
+export default function login(loginForm: LoginForm): Promise<Cookie> {
   const { username, password } = loginForm;
   return axios
-    .post(loginUrl, `username=${username}&password=${password}`, {
+    .post(LOGIN_URL, `username=${username}&password=${password}`, {
       maxRedirects: 0,
     })
     .catch((res) => {
