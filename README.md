@@ -15,12 +15,12 @@ scam api는 비공식적인 숭실대 스마트 캠퍼스 API입니다
  ## 인증
  ### 로그인
 ```javascript
-function login(loginUrl: string, loginForm: LoginForm): Promise<Cookie> {
+function login(loginForm: LoginForm): Promise<Cookie> {
     ...
 }
 
 // example
-login('http://myclass.ssu.ac.kr/login/index.php', { username: '201XXXX', password: 'XXXXXXX' })
+login({ username: '201XXXX', password: 'XXXXXXX' })
     .then(cookie => doWhateverYouWantWith(cookie));
 ```
 
@@ -30,12 +30,12 @@ login('http://myclass.ssu.ac.kr/login/index.php', { username: '201XXXX', passwor
 
 ### 로그아웃
 ```javascript
-function logout(mainUrl: string, cookie: Cookie): Promise<void> {
+function logout(cookie: Cookie): Promise<void> {
     ...
 }
 
 // example
-logout('http://myclass.ssu.ac.kr', cookie)
+logout(cookie)
     .then(() => doWhateverYouWant());
 ```
 
@@ -46,12 +46,12 @@ logout('http://myclass.ssu.ac.kr', cookie)
 ## 일정
 ### 일정 목록 조회
 ```javascript
-function getSchedules (scheduleUrl: string, cookie: Cookie, option: ScheduleExportOption): Promise<CalendarResponse> {
+function getSchedules (cookie: Cookie, option: ScheduleExportOption): Promise<CalendarResponse> {
     ...
 }
 
 // example
-getSchedules('http://myclass.ssu.ac.kr/calendar/export.php', cookie, { event: ScheduleEvent.ALL, period: SchedulePeriod.WEEKNOW })
+getSchedules(cookie, { event: ScheduleEvent.ALL, period: SchedulePeriod.WEEKNOW })
     .then(res => doWhateverYouWantoWith(res))
 ```
 
