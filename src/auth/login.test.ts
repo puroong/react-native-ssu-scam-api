@@ -1,7 +1,7 @@
 import login from './login';
 import axios from 'axios';
 import { Cookie } from '../type';
-import {MAIN_URL, testAuth} from "../config";
+import { MAIN_URL, testAuth } from '../config';
 
 test('test login', () => {
   return login(testAuth)

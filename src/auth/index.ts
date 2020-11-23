@@ -1,7 +1,7 @@
-import login from "./login";
-import logout from "./logout";
+import login from './login';
+import logout from './logout';
 
 export default {
-    login,
-    logout
-}
+  login,
+  logout,
+};

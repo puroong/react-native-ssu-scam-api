@@ -15,7 +15,7 @@ export interface ScheduleExportForm {
   _qf__core_calendar_export_form: number;
   'events[exportevents]': ScheduleEvent;
   'period[timeperiod]': SchedulePeriod;
-  export: SchduleExportAction
+  export: SchduleExportAction;
 }
 
 export interface ScheduleExportOption {
@@ -24,7 +24,7 @@ export interface ScheduleExportOption {
 }
 
 export enum ScheduleEvent {
-  ALL= 'all',
+  ALL = 'all',
   COURSES = 'courses',
 }
 
@@ -32,10 +32,10 @@ export enum SchedulePeriod {
   WEEKNOW = 'weeknow',
   MONTHNOW = 'monthnow',
   RECENTUPCOMING = 'recentupcoming',
-  CUSTOM = 'custom'
+  CUSTOM = 'custom',
 }
 
 export enum SchduleExportAction {
   EXPORT = '내보내기',
-  GENERATEURL = '일정 URL 불러오기'
+  GENERATEURL = '일정 URL 불러오기',
 }
