@@ -32,3 +32,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: run test
         run: npm run test
+        env: 
+          SCAM_USERNAME: ${{ secrets.SCAM_USERNAME }}
+          SCAM_PASSWORD: ${{ secrets.SCAM_PASSWORD }}
