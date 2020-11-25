@@ -1,4 +1,4 @@
-# SSU-Scam-Api
+# React-Native-SSU-Scam-Api
 unofficial ssu smart campus api
 
 # Description
