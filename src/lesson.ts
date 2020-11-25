@@ -1,6 +1,16 @@
 import axios from 'axios';
 import { load } from 'cheerio';
-import { Cookie, LessonAttendance, LessonAttendanceType, LessonLink, Lesson, EMPTY_STRING, EMPTY_LINK, ATTENDANCE_PRESENT, ATTENDANCE_LATE } from './type';
+import {
+  Cookie,
+  LessonAttendance,
+  LessonAttendanceType,
+  LessonLink,
+  Lesson,
+  EMPTY_STRING,
+  EMPTY_LINK,
+  ATTENDANCE_PRESENT,
+  ATTENDANCE_LATE,
+} from './type';
 import { GET_LESSON_ATTENDANCES_URL, GET_LESSON_LINKS_URL } from './config';
 
 export default function getLessons(cookie: Cookie, courseId: number): Promise<Lesson[]> {
@@ -140,7 +150,7 @@ function parseLessonLinks($: cheerio.Root): LessonLink[] {
   lessonLinksCheerio = lessonLinksCheerio.filter((index: number, lessonLinkElement: cheerio.Element) => {
     const lessonLinkCheerio = $(lessonLinkElement);
 
-    return isLesson(lessonLinkCheerio);    
+    return isLesson(lessonLinkCheerio);
   });
 
   const lessonLinks: LessonLink[] = [];
@@ -152,8 +162,8 @@ function parseLessonLinks($: cheerio.Root): LessonLink[] {
     const link = parseLessonLink(lessonLinkCheerio);
 
     lessonLinks.push({
-    title,
-    link,
+      title,
+      link,
     });
   });
   return lessonLinks;
@@ -202,7 +212,9 @@ function mergeLessonAttendanceAndLessonLink(
   const lessons: Lesson[] = [];
 
   lessonLinks.forEach((lessonLink) => {
-    const lessonAttendance = lessonAttendances.find(_lessonAttendance => lessonLink.title === _lessonAttendance.title);
+    const lessonAttendance = lessonAttendances.find(
+      (_lessonAttendance) => lessonLink.title === _lessonAttendance.title,
+    );
 
     if (lessonAttendance === undefined) throw new Error('Cannot find appropriate lesson attendance');
 
