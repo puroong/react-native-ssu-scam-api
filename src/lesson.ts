@@ -140,10 +140,7 @@ function parseLessonLinks($: cheerio.Root): LessonLink[] {
   lessonLinksCheerio = lessonLinksCheerio.filter((index: number, lessonLinkElement: cheerio.Element) => {
     const lessonLinkCheerio = $(lessonLinkElement);
 
-    const lessonLinkOnClick = lessonLinkCheerio.find('a').attr('onclick');
-    const isOnClickExist = lessonLinkOnClick !== EMPTY_STRING && lessonLinkOnClick !== undefined;
-
-    return isOnClickExist;
+    return isLesson(lessonLinkCheerio);    
   });
 
   const lessonLinks: LessonLink[] = [];
@@ -151,15 +148,13 @@ function parseLessonLinks($: cheerio.Root): LessonLink[] {
   lessonLinksCheerio.each((index: number, lessonLinkElement: cheerio.Element) => {
     const lessonLinkCheerio = $(lessonLinkElement);
 
-    if (isLesson(lessonLinkCheerio)) {
-      const title = parseLessonLinkTitle(lessonLinkCheerio);
-      const link = parseLessonLink(lessonLinkCheerio);
+    const title = parseLessonLinkTitle(lessonLinkCheerio);
+    const link = parseLessonLink(lessonLinkCheerio);
 
-      lessonLinks.push({
-        title,
-        link,
-      });
-    }
+    lessonLinks.push({
+    title,
+    link,
+    });
   });
   return lessonLinks;
 }
@@ -167,7 +162,9 @@ function parseLessonLinks($: cheerio.Root): LessonLink[] {
 function isLesson(lessonLinkCheerio: cheerio.Cheerio): boolean {
   // 강의면 onclick 속성이 window.open~이고
   // 과제면 onclick 속성이 없다
-  return lessonLinkCheerio.attr('onclick') !== null;
+  const lessonLinkOnClick = lessonLinkCheerio.find('a').attr('onclick');
+
+  return lessonLinkOnClick !== EMPTY_STRING && lessonLinkOnClick !== undefined;
 }
 
 function parseLessonLinkTitle(lessonLinkCheerio: cheerio.Cheerio): string {
