@@ -50,3 +50,33 @@ export interface Course {
   professor: string;
   tags: CourseTag[];
 }
+
+export enum LessonAttendanceType {
+  PRESENT = 'PRESENT',
+  LATE = 'LATE',
+  ABSENT = 'ABSENT',
+}
+
+export interface LessonAttendance {
+  week: number;
+  title: string;
+  attendance: LessonAttendanceType;
+}
+
+export interface LessonLink {
+  title: string;
+  link: string;
+}
+
+export interface Lesson {
+  week: number;
+  title: string;
+  link: string;
+  attendance: LessonAttendanceType;
+}
+
+export const EMPTY_LINK = '#';
+export const EMPTY_STRING = '';
+
+export const ATTENDANCE_PRESENT = 'O';
+export const ATTENDANCE_LATE = '▲';
