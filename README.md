@@ -9,8 +9,6 @@ scam api는 비공식적인 숭실대 스마트 캠퍼스 API입니다
    - [인증](#인증)
        * [로그인](#로그인)
        * [로그아웃](#로그아웃)
-   - [일정](#일정)
-       * [일정 목록 조회](#일정-목록-조회)
    - [강의](#강의)
        * [강의 목록 조회](#강의-목록-조회)
    - [수업](#수업)
@@ -46,38 +44,6 @@ logout(cookie)
 로그아웃 api입니다.
 
 반드시 로그아웃할 cookie를 전달해줘야합니다.
-
-## 일정
-### 일정 목록 조회
-```javascript
-function getSchedules (cookie: Cookie, option: ScheduleExportOption): Promise<CalendarResponse> {
-    ...
-}
-
-// example
-getSchedules(cookie, { event: ScheduleEvent.ALL, period: SchedulePeriod.WEEKNOW })
-    .then(res => doWhateverYouWantoWith(res))
-```
-
-일정을 가져오는 api입니다.
-
-event와 period 옵션을 꼭 전달해야합니다. 
-
-event
-
-|   | 값 | 설명 |
-|---|----------------|------------------|
-| ALL  |      'all'          |        모든 일정          |
-| COURSES  |   'courses'             |        강좌 관련 일정          |
-
-period
-
-|   | 깂 | 설명 |
-|---|----------------|------------------|
-| WEEKNOW  |       'weeknow'         |          이번주(월-일)        |
-|  MONTHNOW |       'monthnow'         |           이번달       |
-|  RECENTUPCOMING |    'recentupcoming'            |      지금부터 2달            |
-| CUSTOM  |      'custom'          |        이번주(월-금)          |
 
 ## 강의
 ### 강의 목록 조회
