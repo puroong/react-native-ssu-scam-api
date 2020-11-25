@@ -1,78 +1,76 @@
 import axios from 'axios';
-import { Cookie, Course, CourseTag } from "./type";
+import { Cookie, Course, CourseTag } from './type';
 import { load } from 'cheerio';
 import { GET_COURSES_URL } from './config';
 
 export default function getCourses(cookie: Cookie) {
-    return axios
-        .get(GET_COURSES_URL, { headers: { Cookie: cookie.toString() }})
-        .then(res => {
-            const $ = load(res.data);
+  return axios.get(GET_COURSES_URL, { headers: { Cookie: cookie.toString() } }).then((res) => {
+    const $ = load(res.data);
 
-            const courses = parseCourses($);
-            return courses;
-        })
+    const courses = parseCourses($);
+    return courses;
+  });
 }
 
 function parseCourses($: cheerio.Root): Course[] {
-    const courseElements: cheerio.Cheerio = $('li.course_label_re');
+  const courseElements: cheerio.Cheerio = $('li.course_label_re');
 
-    const courses: Course[] = []
-    courseElements.map((index: Number, courseElement: cheerio.Element) => {
-        const courseCheerio = $(courseElement);
+  const courses: Course[] = [];
+  courseElements.map((index: number, courseElement: cheerio.Element) => {
+    const courseCheerio = $(courseElement);
 
-        const id: Number = parseCourseId(courseCheerio);
-        const title: String = parseCourseTitle(courseCheerio);
-        const professor: String = parseCourseProfessor(courseCheerio);
-        const tags: CourseTag[] = parseCourseTags(courseCheerio);
+    const id: number = parseCourseId(courseCheerio);
+    const title: string = parseCourseTitle(courseCheerio);
+    const professor: string = parseCourseProfessor(courseCheerio);
+    const tags: CourseTag[] = parseCourseTags(courseCheerio);
 
-        courses.push({
-            id,
-            title,
-            professor,
-            tags
-        });
+    courses.push({
+      id,
+      title,
+      professor,
+      tags,
     });
+  });
 
-    return courses;
+  return courses;
 }
 
-function parseCourseId(courseCheerio: cheerio.Cheerio): Number {
-    const courseLinkCheerio = courseCheerio.find('a.course_link')
-    const courseLink = courseLinkCheerio.attr('href');
+function parseCourseId(courseCheerio: cheerio.Cheerio): number {
+  const courseLinkCheerio = courseCheerio.find('a.course_link');
+  const courseLink = courseLinkCheerio.attr('href');
 
-    if(courseLink === undefined) throw new Error("Course Link Not Found");
-    const courseId = courseLink.split("?id=")[1];
+  if (courseLink === undefined) throw new Error('Course Link Not Found');
+  const courseId = courseLink.split('?id=')[1];
 
-    return parseInt(courseId);
+  return parseInt(courseId, 10);
 }
 
-function parseCourseTitle(courseCheerio: cheerio.Cheerio): String {
-    const courseTitleCheerio = courseCheerio.find('div.course-title > h3');
-    const title = courseTitleCheerio.text().trim();
+function parseCourseTitle(courseCheerio: cheerio.Cheerio): string {
+  const courseTitleCheerio = courseCheerio.find('div.course-title > h3');
+  const title = courseTitleCheerio.text().trim();
 
-    return title;
+  return title;
 }
 
-function parseCourseProfessor(courseCheerio: cheerio.Cheerio): String {
-    const courseProfessorCheerio = courseCheerio.find('p.prof');
-    const courseProfessor = courseProfessorCheerio.text();
+function parseCourseProfessor(courseCheerio: cheerio.Cheerio): string {
+  const courseProfessorCheerio = courseCheerio.find('p.prof');
+  const courseProfessor = courseProfessorCheerio.text();
 
-    return courseProfessor;
+  return courseProfessor;
 }
 
 function parseCourseTags(courseCheerio: cheerio.Cheerio): CourseTag[] {
-    const courseTagsCheerio = courseCheerio.find('div.course-label');
-    const courseTags: CourseTag[] = [];
-    
-    courseTagsCheerio.each((index: Number, courseTagElement: cheerio.Element) => {
-        const courseTagCheerio = load(courseTagElement).root();
-        const courseTag = courseTagCheerio.text();
-        
-        courseTags.push({
-            name: courseTag
-        });
-    });
+  const courseTagsCheerio = courseCheerio.find('div.course-label');
+  const courseTags: CourseTag[] = [];
 
-    return courseTags;
+  courseTagsCheerio.each((index: number, courseTagElement: cheerio.Element) => {
+    const courseTagCheerio = load(courseTagElement).root();
+    const courseTag = courseTagCheerio.text();
+
+    courseTags.push({
+      name: courseTag,
+    });
+  });
+
+  return courseTags;
 }

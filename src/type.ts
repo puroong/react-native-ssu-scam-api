@@ -41,12 +41,12 @@ export enum SchduleExportAction {
 }
 
 export interface CourseTag {
-  name: String
+  name: string;
 }
 
 export interface Course {
-  id: Number,
-  title: String,
-  professor: String,
-  tags: CourseTag[]
+  id: number;
+  title: string;
+  professor: string;
+  tags: CourseTag[];
 }
