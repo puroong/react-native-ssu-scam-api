@@ -39,3 +39,14 @@ export enum SchduleExportAction {
   EXPORT = '내보내기',
   GENERATEURL = '일정 URL 불러오기',
 }
+
+export interface CourseTag {
+  name: String
+}
+
+export interface Course {
+  id: Number,
+  title: String,
+  professor: String,
+  tags: CourseTag[]
+}

@@ -11,6 +11,8 @@ scam api는 비공식적인 숭실대 스마트 캠퍼스 API입니다
        * [로그아웃](#로그아웃)
    - [일정](#일정)
        * [일정 목록 조회](#일정-목록-조회)
+   - [강의](#강의)
+       * [강의 목록 조회](#강의-목록-조회)
  
  ## 인증
  ### 로그인
@@ -74,3 +76,31 @@ period
 |  MONTHNOW |       'monthnow'         |           이번달       |
 |  RECENTUPCOMING |    'recentupcoming'            |      지금부터 2달            |
 | CUSTOM  |      'custom'          |        이번주(월-금)          |
+
+## 강의
+### 강의 목록 조회
+```javascript
+function getCourses(cookie: Cookie): Promise<Course[]> {
+    ...
+}
+
+// example
+getCourses(cookie)
+    .then(res => doWhateverYouWantoWith(res))
+```
+
+현 학기에 수강하고 있는 강의 목록을 조회하는 api입니다.
+
+Course의 구조는 아래와 같습니다.
+```javascript
+Course {
+    id: Number, // 강의 고유 id
+    title: String, // 강의 제목
+    professor: String, // 교수
+    tags: CourseTag[] // 교과, 학부와 같은 태그
+}
+
+CourseTag {
+    name: String // 태그명
+}
+```
