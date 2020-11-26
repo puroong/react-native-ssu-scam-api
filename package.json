@@ -1,5 +1,5 @@
 {
-  "name": "node-ssu-scam-api",
+  "name": "react-native-ssu-scam-api",
   "version": "1.0.0",
   "description": "unofficial smart campus api",
   "main": "lib/index.js",
