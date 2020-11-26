@@ -42,8 +42,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
-    "cheerio": "^1.0.0-rc.3",
-    "node-ical": "^0.12.1",
-    "qs": "^6.9.4"
+    "qs": "^6.9.4",
+    "react-native-cheerio": "^1.0.0-rc.4"
   }
 }
