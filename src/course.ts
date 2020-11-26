@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cookie, Course, CourseTag } from './type';
-import { load } from 'cheerio';
+import { load } from 'react-native-cheerio';
 import { GET_COURSES_URL } from './config';
 
 export default function getCourses(cookie: Cookie) {

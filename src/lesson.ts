@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { load } from 'cheerio';
+import { load } from 'react-native-cheerio';
 import {
   Cookie,
   LessonAttendance,
